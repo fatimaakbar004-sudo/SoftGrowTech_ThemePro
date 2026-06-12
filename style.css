@@ -1,0 +1,617 @@
+/* =========================
+   ROOT VARIABLES
+========================= */
+
+:root {
+  --bg: #f9fafc;
+  --text: #1f2937;
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
+  --card: rgba(255, 255, 255, 0.7);
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --blur: blur(18px);
+  --transition: 0.4s ease;
+}
+
+body.dark {
+  --bg: #0b0f1a;
+  --text: #e5e7eb;
+  --primary: #818cf8;
+  --secondary: #a78bfa;
+  --card: rgba(20, 20, 30, 0.6);
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background var(--transition),
+    color var(--transition);
+  transition:
+    background 0.6s ease,
+    color 0.6s ease;
+  overflow-x: hidden;
+}
+
+/* =========================
+   SMOOTH THEME TRANSITION
+========================= */
+/* Smooth transition for all UI elements */
+* {
+  transition:
+    background 0.6s ease,
+    color 0.6s ease,
+    border-color 0.6s ease,
+    box-shadow 0.6s ease,
+    transform 0.4s ease;
+}
+
+/* Theme flash overlay */
+.theme-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.4s ease;
+}
+
+body.dark .theme-flash {
+  background: black;
+}
+
+/* Active flash animation */
+.theme-flash.active {
+  opacity: 0.15;
+}
+
+/* Button icon rotation effect */
+#theme-btn i {
+  transition:
+    transform 0.5s ease,
+    opacity 0.3s ease;
+}
+
+#theme-btn:active i {
+  transform: rotate(180deg) scale(0.8);
+}
+
+/* =========================
+   CURSOR GLOW
+========================= */
+
+.cursor-glow {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.25),
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  filter: blur(10px);
+}
+
+/* =========================
+   BACKGROUND BLOBS
+========================= */
+
+.blob {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.blob1 {
+  background: #6366f1;
+  top: 10%;
+  left: 5%;
+}
+
+.blob2 {
+  background: #8b5cf6;
+  bottom: 10%;
+  right: 5%;
+}
+
+.blob3 {
+  background: #22d3ee;
+  top: 50%;
+  left: 40%;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: var(--card);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+#theme-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 20px 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 750px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 15px;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  border-radius: 50px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: 52px;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.hero h1 span {
+  color: var(--primary);
+}
+
+.hero p {
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.primary-btn {
+  background: var(--primary);
+  color: #fff;
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 60px 10%;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.feature-card {
+  padding: 25px;
+  border-radius: 15px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: 0.4s;
+  box-shadow: var(--shadow);
+}
+
+.feature-card i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+}
+
+/* =========================
+   TESTIMONIAL
+========================= */
+
+.testimonials {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.testimonial-card {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  background: var(--card);
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   PRICING
+========================= */
+
+.pricing {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+}
+
+.price-card {
+  padding: 30px;
+  border-radius: 15px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: 0.4s;
+}
+
+.price-card.featured {
+  border: 2px solid var(--primary);
+  transform: scale(1.05);
+}
+
+.price-card button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+}
+
+.price-card a {
+  text-decoration: none;
+  color: #f9fafc;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq {
+  padding: 80px 10%;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--card);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding: 0 15px;
+}
+
+/* =========================
+   FAQ THEME FIX
+========================= */
+
+.faq-question {
+  color: var(--text);
+  transition: color 0.4s ease;
+}
+
+.faq-answer {
+  color: var(--text);
+  opacity: 0.85;
+  transition:
+    color 0.4s ease,
+    opacity 0.4s ease;
+}
+
+/* Optional: better contrast in dark mode */
+body.dark .faq-answer {
+  opacity: 0.9;
+}
+
+body.dark .faq-question {
+  color: var(--text);
+}
+
+.faq-question:hover {
+  color: var(--primary);
+}
+
+.faq-item {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-3px);
+}
+
+/* =========================
+   CONTACT SECTION
+========================= */
+
+.contact {
+  padding: 100px 10%;
+  text-align: center;
+}
+
+.contact-subtitle {
+  margin-top: -20px;
+  margin-bottom: 40px;
+  opacity: 0.8;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 600px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary);
+  transform: scale(1.01);
+}
+
+.contact-form button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.contact-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+/* =========================
+   BUTTON ALIGNMENT FIX
+========================= */
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make anchor behave like button */
+.primary-btn,
+.secondary-btn,
+.hero-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* Ensure proper sizing consistency */
+.primary-btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 50px;
+  text-align: center;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+}
+
+/* =========================
+   ANIMATIONS (JS CONTROLLED)
+========================= */
+
+.hidden-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   PAGE LOADER
+========================= */
+
+body:not(.loaded) {
+  opacity: 0;
+}
+
+body.loaded {
+  opacity: 1;
+  transition: 1s ease;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
